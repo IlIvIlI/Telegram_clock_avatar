@@ -14,6 +14,10 @@ now = ''
 
 while True:
 	if time_has_changed(now):
+		now = time.time()
+		now = now + (60*60*3) #+3 hours to my Virtual Machine time. You may add or sub any amount of time
+		now = now % (60*60*24)						#depending on your local time.
+		now = time.strftime('%H:%M', time.localtime(now))
 		file = client.upload_file(f"time_images_unix/{now}.jpg")
 		client(UploadProfilePhotoRequest(file))
 		time.sleep(2)
